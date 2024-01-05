@@ -137,6 +137,7 @@ double	**transposing_matrix(double **matrix)
 
 	size = matrix_length(matrix);
 	trans_matrix = create_matrix(size);
+	i = 0;
 	while (i < size)
 	{
 		j = 0;
@@ -209,6 +210,7 @@ double **calculate_submatrix(double **matrix, int row, int col)
 // 		determinant *= -1;
 // 	return (determinant);
 // }
+
 // double determinant_3x3(double **matrix)
 // {
 // 	double determinant;
@@ -222,7 +224,7 @@ double **calculate_submatrix(double **matrix, int row, int col)
 // 	return (determinant);
 // }
 
-double determinant_4x4(double **matrix)
+double calculate_determinant(double **matrix)
 {
 	double determinant;
 	int col;
@@ -238,7 +240,7 @@ double determinant_4x4(double **matrix)
 		while (++col < matrix_length(matrix))
 		{
 			submatrix = calculate_submatrix(matrix, 0, col);
-			minor = determinant_4x4(submatrix);
+			minor = calculate_determinant(submatrix);
 			if (col % 2)
 				determinant -= matrix[0][col] * minor;
 			else
@@ -249,32 +251,156 @@ double determinant_4x4(double **matrix)
 	return (determinant);
 }
 
+double **cofactor_matrix(double **matrix)
+{
+	int col;
+	int row;
+	double **submatrix;
+	double **cofactor;
+
+	cofactor = creating_identity_matrix(matrix_length(matrix));
+	if (matrix_length(matrix) == 1)
+		return (cofactor);
+	row = -1;
+	while (++row < matrix_length(matrix))
+	{
+		col = -1;
+		while (++col < matrix_length(matrix))
+		{
+			submatrix = calculate_submatrix(matrix, row, col);
+			cofactor[row][col] = calculate_determinant(submatrix);
+			if ((row + col) % 2)
+				cofactor[row][col] *= -1;
+			free(submatrix);
+		}
+	}
+	return (cofactor);
+}
+
+double **invert_matrix(double **matrix)
+{
+	double **invert;
+	double determinant;
+	double **trans_matrix;
+	int i;
+	int j;
+
+	invert = cofactor_matrix(matrix);
+	determinant = calculate_determinant(matrix);
+	i = -1;
+
+	while (++i < matrix_length(matrix))
+	{
+		j = -1;
+		while (++j < matrix_length(matrix))
+			invert[i][j] = (invert[i][j]) / determinant;
+	}
+	trans_matrix = transposing_matrix(invert);
+	free(invert);
+	return (trans_matrix);
+}
+
+double **create_translation_matrix(t_coordinates tuple)
+{
+	double **translate_matrix;
+
+	translate_matrix = creating_identity_matrix(4);
+	translate_matrix[0][3] = tuple.x;
+	translate_matrix[1][3] = tuple.y;
+	translate_matrix[2][3] = tuple.z;
+	return (translate_matrix);
+}
+
+double **create_scaling_matrix(t_coordinates tuple)
+{
+	double **scaling_matrix;
+
+	scaling_matrix = creating_identity_matrix(4);
+	scaling_matrix[0][0] = tuple.x;
+	scaling_matrix[1][1] = tuple.y;
+	scaling_matrix[2][2] = tuple.z;
+	return (scaling_matrix);
+}
+
+// double **create_rotation_x_matrix(double axis)
+// {
+// 	double **rotation_x_matrix;
+// 	double rad;
+
+// 	rad = axis * (M_PI / 180)
+// 	rotation_x_matrix = creating_identity_matrix(4);
+// 	rotation_x_matrix[1][1] = cos(rad);
+// 	rotation_x_matrix[1][2] = -sin(rad);
+// 	rotation_x_matrix[2][1] = sin(rad);
+// 	rotation_x_matrix[2][2] = cos(rad);
+// 	return (rotation_x_matrix);
+// }
+
+double **shearing_matrix(double proportion[6])
+{
+	double **shearing_matrix;
+
+	shearing_matrix = creating_identity_matrix(4);
+	shearing_matrix[0][1] = proportion[0];
+	shearing_matrix[0][2] = proportion[1];
+	shearing_matrix[1][0] = proportion[2];
+	shearing_matrix[1][2] = proportion[3];
+	shearing_matrix[2][0] = proportion[4];
+	shearing_matrix[2][1] = proportion[5];
+	return (shearing_matrix);
+}
+
 int	main(void)
 {
 	double	**a;
 	double	**b;
-	double	d[4];
-	double	*c;
+	double	**c;
 	int		i;
 
 	a = create_matrix(4);
-	// b = create_matrix(4);
-	a[0][0] = -2;
-	a[0][1] = -8;
-	a[0][2] = 3;
-	a[0][3] = 5;
-	a[1][0] = -3;
-	a[1][1] = 1;
-	a[1][2] = 7;
-	a[1][3] = 3;
-	a[2][0] = 1;
-	a[2][1] = 2;
-	a[2][2] = -9;
-	a[2][3] = 6;
+	a[0][0] = 3;
+	a[0][1] = -9;
+	a[0][2] = 7;
+	a[0][3] = 3;
+	a[1][0] = 3;
+	a[1][1] = -8;
+	a[1][2] = 2;
+	a[1][3] = -9;
+	a[2][0] = -4;
+	a[2][1] = 4;
+	a[2][2] = 4;
+	a[2][3] = 1;
 	a[3][0] = -6;
-	a[3][1] = 7;
-	a[3][2] = 7;
-	a[3][3] = -9;
-	printf("%f\n", determinant_4x4(a));
-	// printf("%f\n", determinant_2x2(a));
+	a[3][1] = 5;
+	a[3][2] = -1;
+	a[3][3] = 1;
+
+	b = create_matrix(4);
+	b[0][0] = 8;
+	b[0][1] = 2;
+	b[0][2] = 2;
+	b[0][3] = 2;
+	b[1][0] = 3;
+	b[1][1] = -1;
+	b[1][2] = 7;
+	b[1][3] = 0;
+	b[2][0] = 7;
+	b[2][1] = 0;
+	b[2][2] = 5;
+	b[2][3] = 4;
+	b[3][0] = 6;
+	b[3][1] = -2;
+	b[3][2] = 0;
+	b[3][3] = 5;
+
+	c = create_rotation_x_matrix()
+	double **d = multiply_matrix(c, invert_matrix(b));
+	i = -1;
+	while (++i < 4)
+	{
+		int j = -1;
+		while (++j < 4)
+			printf("%f ", d[i][j]);
+		printf("\n");
+	}
 }
