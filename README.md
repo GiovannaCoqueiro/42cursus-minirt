@@ -53,22 +53,6 @@
 </ul>
 
 <h4 align=left>
-  Scene
-</h4>
-<ul>
-  <li>Implement at least three simple geometric objects: plane, sphere and cylinder.</li>
-  <li>If applicable, all possible intersections and the inside of the object must be handled
-correctly.</li>
-  <li>Light management: spot brightness, hard shadows, ambiance lighting (objects are
-never completely in the dark). You must implement Ambient and diffuse lighting.</li>
-  <li>Your program must be able to apply translation and rotation transformation to
-objects, lights and cameras (except for spheres and lights that cannot be rotated).</li>
-  <li>Your program must be able to resize the object’s unique properties: diameter for a
-sphere and the width and height for a cylinder.</li>
-  <li>The scene must be a 3D view.</li>
-</ul>
-
-<h4 align=left>
   Graphic management
 </h4>
 <ul>
@@ -82,6 +66,16 @@ minimization, etc..</li>
   Scene
 </h4>
 <ul>
+  <li>Implement at least three simple geometric objects: plane, sphere and cylinder.</li>
+  <li>If applicable, all possible intersections and the inside of the object must be handled
+correctly.</li>
+  <li>Light management: spot brightness, hard shadows, ambiance lighting (objects are
+never completely in the dark). You must implement Ambient and diffuse lighting.</li>
+  <li>Your program must be able to apply translation and rotation transformation to
+objects, lights and cameras (except for spheres and lights that cannot be rotated).</li>
+  <li>Your program must be able to resize the object’s unique properties: diameter for a
+sphere and the width and height for a cylinder.</li>
+  <li>The scene must be a 3D view.</li>
   <li>The scene file must be composed for three mandatory elements plus any object you want to render.</li>
 
   | Symbol | Element | Status |
