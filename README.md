@@ -28,15 +28,15 @@
 		Some images made with MiniRT
 	</h3>
 	<h4>
-		Composition.rt
+		composition.rt
 	</h4>
 	<img src="https://github.com/GiovannaCoqueiro/42cursus-minirt/assets/115947494/150f381f-33a2-4f34-8350-f1fd0547b7e0" alt=composition_image/>
 	<h4>
-		Jamis.rt
+		jamis.rt
 	</h4>
 	<img src="https://github.com/GiovannaCoqueiro/42cursus-minirt/assets/115947494/a611604b-b9c5-4ae0-bffd-8b80010cd2ad" alt=jamis_image/>
  	<h4>
-		Jamis.rt
+		cylinders.rt
 	</h4>
 	<img src="https://github.com/GiovannaCoqueiro/42cursus-minirt/assets/115947494/a9376e43-832d-4cd5-8618-b6faf80c926b" alt=cylinders_image/>
 </div>
