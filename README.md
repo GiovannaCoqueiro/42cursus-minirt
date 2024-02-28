@@ -43,40 +43,39 @@
 
 ---
 
-<h3 align=left>
-    Mandatory
-</h3>
-<p>
-  Create a 2D game in which a character will escape a map after collecting everything it has to be collected.
-</p>
-
 <h4 align=left>
   Preparation
 </h4>
 <ul>
   <li>Use MinilibX.</li>
   <li>Turn in a Makefile to compile your program and it must not relink.</li>
-  <li>The program must take as parameter a map file ending with the '.ber' extension.</li>
+  <li>The program must take as parameter a scene file ending with the '.rt' extension.</li>
 </ul>
 
 <h4 align=left>
-  Game
+  Scene
 </h4>
 <ul>
-  <li>The player must collect every collectible present on the map and then escape through the exit.</li>
-  <li>The player must be moved by pressing AWSD keys or the arroy keys.</li>
-  <li>The player must be moved in 4 directions: left, right, down and up.</li>
-  <li>The player can't move into a wall.</li>
-  <li>The program must display the movement count in the terminal.</li>
-  <li>The game must be a 2D view.</li>
+  <li>Implement at least three simple geometric objects: plane, sphere and cylinder.</li>
+  <li>If applicable, all possible intersections and the inside of the object must be handled
+correctly.</li>
+  <li>Light management: spot brightness, hard shadows, ambiance lighting (objects are
+never completely in the dark). You must implement Ambient and diffuse lighting.</li>
+  <li>Your program must be able to apply translation and rotation transformation to
+objects, lights and cameras (except for spheres and lights that cannot be rotated).</li>
+  <li>Your program must be able to resize the object’s unique properties: diameter for a
+sphere and the width and height for a cylinder.</li>
+  <li>The scene must be a 3D view.</li>
 </ul>
 
 <h4 align=left>
   Graphic management
 </h4>
 <ul>
-  <li>The program must display the image in  awindow.</li>
+  <li>The program must display the image in a window.</li>
   <li>The window must close and the program must quit when the user press ESC or click on the cross on the window.</li>
+	<li>The management of your window must remain fluid: switching to another window,
+minimization, etc..</li>
 </ul>
 
 <h4 align=left>
@@ -145,6 +144,11 @@
 	</ul>
   </li>
 </ul>
+
+<p>
+	Exemple:
+</p>
+<img src="https://github.com/GiovannaCoqueiro/42cursus-minirt/assets/115947494/138f147a-27c1-4d44-b6e4-e5d2b2a31d8c" alt=scene_file_exemple/>
 
 ---
 
